@@ -18,7 +18,9 @@ import junit.framework.TestCase;
 public class BiscuitTest extends TestCase { 
   public void testEquals() 
   { 
-    Biscuit theBiscuit = new Biscuit("Ginger");     Biscuit myBiscuit = new Biscuit("Ginger");   assertThat(theBiscuit, equalTo(myBiscuit)); 
+    Biscuit theBiscuit = new Biscuit("Ginger");  
+    Biscuit myBiscuit = new Biscuit("Ginger");   
+    assertThat(theBiscuit, equalTo(myBiscuit));  
   } 
 }
 ```
@@ -27,7 +29,8 @@ public class BiscuitTest extends TestCase {
 
 如果测试中有多个断言，可以在断言中包含被测试值的标识符：
 ``` java
-assertThat("chocolate chips", theBiscuit.getChocolateChipCount(), equalTo(10)); assertThat("hazelnuts", theBiscuit.getHazelnutCount(), equalTo(3));
+assertThat("chocolate chips", theBiscuit.getChocolateChipCount(), equalTo(10));  
+assertThat("hazelnuts", theBiscuit.getHazelnutCount(), equalTo(3));
 ```
 
 ## 其他测试框架
@@ -76,7 +79,9 @@ Hamcrest自带一个有用的匹配库，这里是一些最重要的
 ## Sugar
 Hamcrest努力使得你的测试尽可能的可读，例如 ***is***是一个匹配器的包装器不向基础匹配器添加任何额外的行为。如下断言都是等效的
 ``` java
-assertThat(theBiscuit, equalTo(myBiscuit));   assertThat(theBiscuit, is(equalTo(myBiscuit)));   assertThat(theBiscuit, is(myBiscuit));  
+assertThat(theBiscuit, equalTo(myBiscuit));  
+assertThat(theBiscuit, is(equalTo(myBiscuit)));   
+assertThat(theBiscuit, is(myBiscuit));  
 ```
 最后一个形式是被允许的，因为is(T value)被重载返回is(equalTo(value)).
 
