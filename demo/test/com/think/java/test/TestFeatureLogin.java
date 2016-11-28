@@ -12,4 +12,8 @@ public class TestFeatureLogin {
         System.out.println("TestFeatureLogin->testAssertEquals_Login");
         assertEquals("login", "login");
     }
+
+    @Test public void testAssertEquals_vim() {
+        assertEquals("vim", "vim");
+    }
 }
