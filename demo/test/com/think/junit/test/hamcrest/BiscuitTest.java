@@ -1,6 +1,7 @@
 package com.think.junit.test.hamcrest;
 
-import com.think.java.test.Biscuit;
+
+import com.think.junit.Biscuit;
 
 import junit.framework.TestCase;
 
