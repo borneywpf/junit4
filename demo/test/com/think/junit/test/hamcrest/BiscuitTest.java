@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 /**
- * Created by borney on 11/28/16.
+ * 匹配器使用
  */
 public class BiscuitTest extends TestCase {
 

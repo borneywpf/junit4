@@ -21,9 +21,9 @@ import static org.junit.Assert.fail;
 
 
 /**
- * Created by borney on 11/28/16.
+ * Exception测试
  */
-public class TestExceptions {
+public class Exceptions {
 
     /**
      * normal use

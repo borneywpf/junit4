@@ -26,7 +26,7 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by borney on 11/25/16.
+ * 断言
  */
 public class AssertTests {
 

@@ -5,10 +5,10 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 /**
- * Created by borney on 11/28/16.
+ * 设置单元测试顺序
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TestExecutionOrder {
+public class ExecutionOrder {
 
     @Test public void testA() {
         System.out.println("testA");

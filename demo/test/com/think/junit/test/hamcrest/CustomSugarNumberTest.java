@@ -7,7 +7,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 /**
- * Created by borney on 11/29/16.
+ * 自定义的匹配器
  */
 public class CustomSugarNumberTest {
 

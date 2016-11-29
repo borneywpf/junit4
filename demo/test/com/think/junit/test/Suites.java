@@ -4,7 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 /**
- * Created by borney on 11/26/16.
+ * 组合测试
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -12,6 +12,6 @@ import org.junit.runners.Suite;
         TestFeatureLogout.class,
 })
 
-public class TestSuites {
+public class Suites {
 
 }
