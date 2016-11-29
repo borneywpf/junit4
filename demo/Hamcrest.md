@@ -155,42 +155,69 @@ public class NumberTest extends TestCase {
 如果你生成了多个自定义的匹配器，必须单个导入它们变得使人烦恼，将它们组合在一个类中这将是一个很高兴的事情。因此它们可以使用一个静态导入，就像Hamcrest库匹配器一样。Hamcrest通过使用generator来做到这一点。  
 首先、创建一个xml配置文件，列出应该使用org.hamcrest.Factory注解注解的工厂方法的所有Matcher类。例如
 ``` xml
+<matchers>
+    <!-- Core -->
+    <factory class="com.think.junit.hamcrest.IsNotANumber"/>
 
+</matchers>
 ```
-其次、运行Hamcrest附带的org.hamcrest.generator.config.XmlConfigurator命令行工具，此工具使用xml配置文件，生成一个包含xml文件指定的所有工厂方法的java类，运行它没有参数时将输出使用信息。下面是该实例的输出。
+其次、将自己的Matcher class打成jar包（该步骤非官方提供，因为我按照官方的方法，没有调试通就自己摸索了这种方式生成Sugar）
+![hamcrest-sugar-jar](res/hamcrest-sugar-jar.png)
+再次、运行Hamcrest附带的org.hamcrest.generator.config.XmlConfigurator命令行工具，此工具使用xml配置文件，生成一个包含xml文件指定的所有工厂方法的java类.
+```
+java -cp .:demo/hamcrest-generator-1.3.jar org.hamcrest.generator.config.XmlConfigurator
+```
+运行它没有参数时将输出使用信息
+```
+Args: config-file source-dir generated-class output-dir
+
+    config-file : Path to config file listing matchers to generate sugar for.
+                  e.g. path/to/matchers.xml
+
+    source-dir  : Path to Java source containing matchers to generate sugar for.
+                  May contain multiple paths, separated by commas.
+                  e.g. src/java,src/more-java
+
+generated-class : Full name of class to generate.
+                  e.g. org.myproject.MyMatchers
+
+     output-dir : Where to output generated code (package subdirs will be
+                  automatically created).
+                  e.g. build/generated-code
+```
+
+下面通过中断命令行输出实例。
+![hamcrest-sugar-generator](res/hamcrest-sugar-generator.png)
+生成的实例代码
 ``` java
-// Generated source. package org.hamcrest.examples.tutorial;
+// Generated source.
+package com.think.junit.hamcrest;
 
 public class Matchers {
 
-public static org.hamcrest.Matcher is(T param1) { return org.hamcrest.core.Is.is(param1); }
-
-public static org.hamcrest.Matcher is(java.lang.Class param1) { return org.hamcrest.core.Is.is(param1); }
-
-public static org.hamcrest.Matcher is(org.hamcrest.Matcher param1) { return org.hamcrest.core.Is.is(param1); }
-
-public static org.hamcrest.Matcher notANumber() 
-{ 
-  return org.hamcrest.examples.tutorial.IsNotANumber.notANumber(); 
-}
+  public static org.hamcrest.Matcher notANumber() {
+    return com.think.junit.hamcrest.IsNotANumber.notANumber();
+  }
 
 }
 ```
 最后，我们可以更新我们的测试类以使用新的Matchers类
 ``` java
+import org.junit.Test;
+
+import static com.think.junit.hamcrest.Matchers.notANumber;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
-import static org.hamcrest.examples.tutorial.Matchers.*;
+/**
+ * Created by borney on 11/29/16.
+ */
+public class CustomSugarNumberTest {
 
-import junit.framework.TestCase;
-
-public class CustomSugarNumberTest extends TestCase 
-{
-
-  public void testSquareRootOfMinusOneIsNotANumber() 
-  { 
-    assertThat(Math.sqrt(-1), is(notANumber())); 
-  } 
+    @Test
+    public void testSquareRootOfMinusOneIsNotANumber() {
+        assertThat(Math.sqrt(-1), is(notANumber()));
+    }
 }
 ```
 注意，我们现在使用的是Hamcrest库是从我们自己的Matcher类中导入的Matcher
