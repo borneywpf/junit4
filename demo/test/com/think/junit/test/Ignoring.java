@@ -7,7 +7,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 /**
- * ????
+ * 忽略
  */
 public class Ignoring {
     @Ignore("Test is ignored as a demonstration")
